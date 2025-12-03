@@ -96,7 +96,14 @@ const appTitle = 'Tic Tac Toe'
           :disabled="!!winner || !!cell"
           @click="handleCellClick(idx)"
         >
-          <span class="mark">{{ cell }}</span>
+          <!-- Use chess icons: X => Knight ♞, O => Queen ♛ -->
+          <span
+            class="mark"
+            :aria-label="cell === 'X' ? 'Knight' : cell === 'O' ? 'Queen' : 'Empty'"
+            role="img"
+          >
+            {{ cell === 'X' ? '♞' : cell === 'O' ? '♛' : '' }}
+          </span>
         </button>
       </div>
 
@@ -184,7 +191,8 @@ const appTitle = 'Tic Tac Toe'
   border-radius: 12px;
   background: #ffffff;
   color: var(--text);
-  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  /* Slightly larger for chess glyphs and responsive scaling */
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
   font-weight: 800;
   letter-spacing: 1px;
   display: grid;
@@ -225,6 +233,8 @@ const appTitle = 'Tic Tac Toe'
 
 .mark {
   transform: translateZ(0);
+  line-height: 1;
+  display: inline-block;
 }
 
 .actions {
